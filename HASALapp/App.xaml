@@ -1,5 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HASALapp.App">
     <Application.Resources>
+          <ResourceDictionary>
+             <Style TargetType="Page">
+                <Setter Property="BackgroundColor" Value="White" />
+                <!--<Setter Property="BarBackgroundColor" Value="#08adcf" />-->
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="orangejuice" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="#823642"/>
+                <Setter Property="Margin" Value="10"/>
+  
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="orangejuice" />
+                <Setter Property="FontSize" Value="16" />
+                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#823642" />
+                 <Setter Property="BorderRadius" Value="20"></Setter>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily" Value="orangejuice" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
+           <!--<Style TargetType="StackLayout">
+                <Setter Property="Padding" Value="20" />
+            </Style>-->
+            <Style x:Key="LinkButtonStyle" TargetType="Button">
+               <Setter Property="FontFamily" Value="orangejuice" />
+               <Setter Property="FontSize" Value="14" />
+               <Setter Property="TextColor" Value="White" />
+               <Setter Property="BackgroundColor" Value="white" />
+               <Setter Property="BorderRadius" Value="0"></Setter>
+            </Style>
+            <!--<Style TargetType="TextCell">
+               <Setter Property="TextColor" Value="#823642" />
+            </Style>-->
+           
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

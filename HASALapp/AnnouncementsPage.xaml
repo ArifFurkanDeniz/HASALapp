@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage Title="DUYURULAR"
+             xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="HASALapp.AnnouncementsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="AnnouncementsView" 
+                      ItemSelected="Handle_ItemSelected" 
+                      ItemTapped="Handle_ItemTapped">
+            <ListView.ItemTemplate>
+              <DataTemplate>
+                <TextCell Text="{Binding Title}" TextColor="#823642" />
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

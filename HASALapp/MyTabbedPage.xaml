@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+            xmlns:mypages="clr-namespace:HASALapp"
+            x:Class="HASALapp.MyTabbedPage"
+            NavigationPage.HasNavigationBar="false">
+ 
+
+     <mypages:LocationsPage/>
+     <mypages:AnnouncementsPage />
+     <mypages:SurveysPage />
+    <ContentPage Title="..."/>
+     
+     
+  <!-- <ContentPage Title="Tab 1"/>
+     <ContentPage Title="Tab 1"/>
+     <ContentPage Title="Tab 1"/>-->
+</TabbedPage>

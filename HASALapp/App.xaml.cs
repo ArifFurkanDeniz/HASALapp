@@ -11,7 +11,16 @@ namespace HASALapp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            if (Application.Current.Properties.ContainsKey("Auth"))
+            {
+                MainPage = new MyTabbedPage();
+
+            }
+            else
+            {
+                MainPage = new LoginPage();
+
+            }
         }
 
         protected override void OnStart()

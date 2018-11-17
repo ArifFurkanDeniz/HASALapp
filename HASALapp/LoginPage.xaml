@@ -17,7 +17,7 @@
                     >               
             </Entry>
             <Button x:Name="loginButton" 
-                    Clicked="LoginClicLogin_Clicked"
+                    Clicked="Login_Clicked"
                    VerticalOptions="CenterAndExpand"
                     Text="GİRİŞ"
                     ></Button>

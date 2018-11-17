@@ -28,11 +28,7 @@ namespace HASALapp.Models
             set;
         }
 
-        public bool IsSelected
-        {
-            get;
-            set;
-        }
+      
 
         public List<Choice> Choices
         {

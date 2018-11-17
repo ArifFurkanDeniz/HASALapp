@@ -12,13 +12,17 @@ namespace HASALapp
 
             InitializeComponent();
 
-            #if DEBUG
+            /*#if DEBUG
             emailEntry.Text = "ariffurkandeniz@gmail.com";
             passwordEntry.Text = "535353";
-            #endif
+            #endif*/
+
+            emailEntry.Text = SettingsService.LastUsedEmail;
+            passwordEntry.Text = SettingsService.LastUsedPassword;
+
         }
 
-        async void LoginClicLogin_Clicked(object sender, System.EventArgs e)
+        async void Login_Clicked(object sender, System.EventArgs e)
         {
             //NavigationPage nav = new NavigationPage(new MyTabbedPage());
             try

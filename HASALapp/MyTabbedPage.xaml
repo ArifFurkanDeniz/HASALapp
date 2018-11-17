@@ -9,7 +9,12 @@
      <mypages:LocationsPage/>
      <mypages:AnnouncementsPage />
      <mypages:SurveysPage />
-    <ContentPage Title="..."/>
+    <ContentPage Title="...">
+        <StackLayout>
+            <Button Text="Çıkış" Clicked="Logout_Clicked"></Button>
+        </StackLayout>
+        
+    </ContentPage>
      
      
   <!-- <ContentPage Title="Tab 1"/>

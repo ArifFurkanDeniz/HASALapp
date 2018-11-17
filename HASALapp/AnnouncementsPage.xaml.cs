@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using HASALapp.Models;
 using HASALapp.Services;
 using Xamarin.Forms;
@@ -9,6 +10,8 @@ namespace HASALapp
 {
     public partial class AnnouncementsPage : ContentPage
     {
+        ObservableCollection<Announcement> announcements;
+        FirebaseService firebaseService;
         public AnnouncementsPage()
         {
             InitializeComponent();
@@ -16,13 +19,15 @@ namespace HASALapp
 
         protected async override void OnAppearing()
         {
-            FirebaseService firebaseService = new FirebaseService();
+            firebaseService = new FirebaseService();
             var announcementList = await firebaseService.GetAnnouncements();
 
-            ObservableCollection<Announcement> announcements = new ObservableCollection<Announcement>(announcementList);
+            announcements = new ObservableCollection<Announcement>(announcementList);
             AnnouncementsView.ItemsSource = announcements;
             base.OnAppearing();
         }
+
+     
 
         void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {

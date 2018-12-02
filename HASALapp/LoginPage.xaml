@@ -21,14 +21,14 @@
                    VerticalOptions="CenterAndExpand"
                     Text="GİRİŞ"
                     ></Button>
-            <Button Text="ŞİFREMİ UNUTTUM!" 
+            <!--<Button Text="ŞİFREMİ UNUTTUM!" 
                     
                    VerticalOptions="Center"
                    HorizontalOptions="End"
                    TextColor="#823642"
                    Style="{StaticResource LinkButtonStyle}"
                    Clicked="ForgetPassword_Clicked"
-                   ></Button>
+                   ></Button>-->
           
         </StackLayout>
         

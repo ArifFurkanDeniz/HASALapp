@@ -6,6 +6,7 @@ namespace HASALapp.Services
 {
     public interface IFirebaseAuthenticator
     {
-        Task<User> LoginWithEmailPassword(string email, string password);
+        Task<User> LoginWithEmailPasswordAsync(string email, string password);
+
     }
 }

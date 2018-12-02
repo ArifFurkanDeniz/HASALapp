@@ -25,5 +25,16 @@ namespace HASALapp.Models
             get;
             set;
         }
+
+        public long Asc{
+            get;
+            set;
+        }
+
+        public long Desc{
+            get;
+            set;
+        }
+    
     }
 }

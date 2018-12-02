@@ -21,6 +21,15 @@ namespace HASALapp
             Title = _announcement.Title;
             LabelText.Text = _announcement.Description;
             Image.Source = _announcement.ImageUrl;
+            if (!string.IsNullOrEmpty(_announcement.ImageUrl))
+            {
+                Image.Source = _announcement.ImageUrl;
+                Image.IsVisible = true;
+            }
+            else
+            {
+                Image.IsVisible = false;
+            }
             base.OnAppearing();
         }
 

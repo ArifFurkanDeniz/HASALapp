@@ -21,7 +21,7 @@ namespace HASALapp.Services
 
             IFirebaseConfig config = new FirebaseConfig
             {
-                //AuthSecret = "",
+                AuthSecret = FirebaseService.User.Token,
                 BasePath = "https://hasal-3c840.firebaseio.com/"
             };
 
@@ -31,11 +31,13 @@ namespace HASALapp.Services
         public async Task<List<Announcement>> GetAnnouncements()
         {
             string apiString = CollectionEnum.announcements.ToString();
-            var response = await client.GetAsync(apiString);
+
+          
+            var response = await client.GetAsync(apiString);  
             var announcements = JsonConvert.DeserializeObject<Dictionary<string, Announcement>>(response.Body);
 
             var announcementList = new List<Announcement>();
-            foreach (var item in announcements)
+            foreach (var item in announcements.OrderBy(x=>x.Value.Desc))
             {
                 var announcement = item.Value;
                 announcement.Key = item.Key;
@@ -57,22 +59,31 @@ namespace HASALapp.Services
           
 
             var surveyList = new List<Survey>();
-            foreach (var item in surveys)
+            foreach (var item in surveys.OrderBy(x => x.Value.Desc))
             {
+                var _surveyChoices = await client.GetAsync(CollectionEnum.surveys.ToString());
+                var _surveyChoices2 = JsonConvert.DeserializeObject<Dictionary<string, Choice>>(_surveyChoices.Body);
+
                 var survey = item.Value;
                 survey.Key = item.Key;
-                var userChoices = choices.Where(x => x.Key == item.Key).Select(x=>x.Value).FirstOrDefault();
-                if (userChoices!=null)
-                {
-                    foreach (var choice in survey.Choices)
-                    {
-                        if (userChoices.Values.Where(x=>x.ChoiceKey == choice.Key).Any())
-                        {
-                            choice.IsSelected = true;
+                survey._Choices = _surveyChoices2.Select(x=> new Choice{ Key= x.Key, Title = x.Value.Title}).ToList();
 
+                if (choices!=null)
+                {
+                    var userChoices = choices.Where(x => x.Key == item.Key).Select(x => x.Value).FirstOrDefault();
+                    if (userChoices != null)
+                    {
+                        foreach (var choice in survey._Choices)
+                        {
+                            if (userChoices.Values.Where(x => x.ChoiceKey == choice.Key).Any())
+                            {
+                                choice.IsSelected = true;
+
+                            }
                         }
                     }
                 }
+               
                 surveyList.Add(item.Value);
             }
 
@@ -110,7 +121,7 @@ namespace HASALapp.Services
                 return false;
             }
 
-            return false;
+            return true;
            
         }
     }

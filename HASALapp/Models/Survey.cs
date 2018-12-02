@@ -28,9 +28,19 @@ namespace HASALapp.Models
             set;
         }
 
-      
+        public List<Choice> _Choices
+        {
+            get;
+            set;
+        }
 
-        public List<Choice> Choices
+        public long Asc
+        {
+            get;
+            set;
+        }
+
+        public long Desc
         {
             get;
             set;

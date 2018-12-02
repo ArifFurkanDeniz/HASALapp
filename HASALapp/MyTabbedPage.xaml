@@ -10,8 +10,10 @@
      <mypages:AnnouncementsPage />
      <mypages:SurveysPage />
     <ContentPage Title="...">
-        <StackLayout>
-            <Button Text="Çıkış" Clicked="Logout_Clicked"></Button>
+        <StackLayout Padding="20">
+            <!--<Button Text="ŞİFRE DEĞİŞTİR" Clicked="ChangePassword_Clicked" VerticalOptions="EndAndExpand"></Button>-->
+     
+            <Button Text="ÇIKIŞ YAP" Clicked="Logout_Clicked" VerticalOptions="EndAndExpand"></Button>
         </StackLayout>
         
     </ContentPage>

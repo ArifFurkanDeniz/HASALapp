@@ -19,12 +19,20 @@ namespace HASALapp
 
         protected override void OnAppearing()
         {
-            ObservableCollection<Choice> choices = new ObservableCollection<Choice>(_survey.Choices);
+            ObservableCollection<Choice> choices = new ObservableCollection<Choice>(_survey._Choices);
             ChoiceList.ItemsSource = choices;
             ChoiceList.SelectedItem = choices.Where(x => x.IsSelected).FirstOrDefault();
             Title = _survey.Title;
             LabelText.Text = _survey.Text;
-            Image.Source = _survey.ImageUrl;
+            if (!string.IsNullOrEmpty(_survey.ImageUrl))
+            {
+                Image.Source = _survey.ImageUrl;
+                Image.IsVisible = true;
+            }
+            else{
+                Image.IsVisible = false;
+            }
+
          
 
             base.OnAppearing();

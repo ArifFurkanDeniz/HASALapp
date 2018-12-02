@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using HASALapp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +13,7 @@ namespace HASALapp
         {
             InitializeComponent();
 
-          
+
             MainPage = new LoginPage();
 
 
@@ -20,6 +22,9 @@ namespace HASALapp
         protected override void OnStart()
         {
             // Handle when your app starts
+       
+             
+
         }
 
         protected override void OnSleep()

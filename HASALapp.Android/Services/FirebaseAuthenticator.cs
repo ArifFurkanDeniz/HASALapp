@@ -11,8 +11,11 @@ namespace HASALapp.Droid.Services
 {
     public class FirebaseAuthenticator : IFirebaseAuthenticator
     {
-        public async Task<User> LoginWithEmailPassword(string email, string password)
+       
+
+        public async Task<User> LoginWithEmailPasswordAsync(string email, string password)
         {
+
             var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
             var token = await user.User.GetIdTokenAsync(false);
 

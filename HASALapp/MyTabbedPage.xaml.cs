@@ -14,6 +14,8 @@ namespace HASALapp
 
         void Logout_Clicked(object sender, System.EventArgs e)
         {
+            SettingsService.LastUsedEmail = null;
+            SettingsService.LastUsedPassword = null;
             Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }

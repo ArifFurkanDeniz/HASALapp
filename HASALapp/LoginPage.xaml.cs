@@ -28,15 +28,23 @@ namespace HASALapp
     
             if (!string.IsNullOrEmpty(SettingsService.LastUsedEmail) && !string.IsNullOrEmpty(SettingsService.LastUsedPassword) && !GeneralHelper.IsNotFirstLogin)
             {
-                var user = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPasswordAsync(SettingsService.LastUsedEmail, SettingsService.LastUsedPassword);
-                //user.Start();
-
-                if (user != null)
+                try
                 {
-                    GeneralHelper.IsNotFirstLogin = true;
-                    FirebaseService.User = user;
-                    await Navigation.PushModalAsync(new NavigationPage(new MyTabbedPage()));
+                    var user = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPasswordAsync(SettingsService.LastUsedEmail, SettingsService.LastUsedPassword);
+                    //user.Start();
+
+                    if (user != null)
+                    {
+                        GeneralHelper.IsNotFirstLogin = true;
+                        FirebaseService.User = user;
+                        await Navigation.PushModalAsync(new NavigationPage(new MyTabbedPage()));
+                    }
                 }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Uyarı", ex.Message, "Tamam");
+                }
+               
             }
             base.OnAppearing();
         }

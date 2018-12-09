@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Plugin.Permissions.Abstractions;
 using Plugin.Permissions;
+using System.Globalization;
 
 namespace HASALapp
 {
@@ -27,7 +28,7 @@ namespace HASALapp
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
-                        await DisplayAlert("Need location", "Gunna need that location", "OK");
+                        await DisplayAlert("Konum gerekli", "Uygulama konum bilgisini kullanmalı", "Tamam");
                     }
 
 
@@ -40,28 +41,41 @@ namespace HASALapp
                     }
                     else
                     {
-                        //to do: bilinen son konumu al
-                    }
-                }
+                        currentPosition = await locator.GetLastKnownLocationAsync();
 
-                if (status == PermissionStatus.Granted)
+                    }
+                } 
+                else if (status == PermissionStatus.Granted)
                 {
                     currentPosition = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
                 }
                 else if (status != PermissionStatus.Unknown)
                 {
-                    await DisplayAlert("Location Denied", "Can not continue, try again.", "OK");
+                    await DisplayAlert("Konum izni verilmedi", "Bu sayfayı kullanabilmeniz için konum izni vermelisiniz.", "Tamam");
                 }
             }
             catch (Exception ex)
             {
-                //...
+                await DisplayAlert("Konum gerekli", ex.Message, "Tamam");
             }
 
-           
-            var map = new Map(
-           MapSpan.FromCenterAndRadius(
-                    new Position(currentPosition.Latitude, currentPosition.Longitude), Distance.FromMiles(3)))
+            MapSpan region = null;
+            Map map = null;
+
+            if (currentPosition!=null)
+            {
+                region = MapSpan.FromCenterAndRadius(
+                               new Position(currentPosition.Latitude, currentPosition.Longitude), Distance.FromMiles(3));
+               
+            }
+            else{
+                // hasal'dan başlat 41.013929, 29.038842
+                region = MapSpan.FromCenterAndRadius(
+                               new Position(41.013929, 29.038842), Distance.FromMiles(3));
+
+            }
+
+            map = new Map(region)
             {
                 IsShowingUser = true,
                 HeightRequest = 100,
@@ -69,13 +83,17 @@ namespace HASALapp
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
+
+
+
+
             FirebaseService firebaseService = new FirebaseService();
             var locationList = await firebaseService.GetLocations();
             #region pins
             foreach (var item in locationList)
             {
-                double latitude = Convert.ToDouble(item.Position.ToString().Split(',')[0]);
-                double longitude = Convert.ToDouble(item.Position.ToString().Split(',')[1]);
+                double latitude = Convert.ToDouble(item.Position.ToString().Split(',')[0], CultureInfo.InvariantCulture);
+                double longitude = Convert.ToDouble(item.Position.ToString().Split(',')[1], CultureInfo.InvariantCulture);
                 var position = new Position(latitude, longitude ); // Latitude, Longitude
                 var pin = new Pin
                 {

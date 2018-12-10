@@ -17,16 +17,24 @@ namespace HASALapp.Droid.Services
         {
 
             var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
-            var token = await user.User.GetIdTokenAsync(false);
-
-            var _user = new User()
+          
+            try
             {
-                Token = token.Token,
-                UserId = user.User.Uid,
-                Email = user.User.Email
-            };
+                var token = await user.User.GetIdTokenAsync(false);
 
-            return _user;
+                var _user = new User()
+                {
+                    Token = token.Token,
+                    UserId = user.User.Uid,
+                    Email = user.User.Email
+                };
+                return _user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+                
         }
     }
 }

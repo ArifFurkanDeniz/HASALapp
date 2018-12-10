@@ -34,9 +34,16 @@ namespace HASALapp.Services
 
           
             var response = await client.GetAsync(apiString);  
+
+            if (response.Body == "null")
+            {
+                return new List<Announcement>();
+            }
+
             var announcements = JsonConvert.DeserializeObject<Dictionary<string, Announcement>>(response.Body);
 
             var announcementList = new List<Announcement>();
+
             foreach (var item in announcements.OrderBy(x=>x.Value.Desc))
             {
                 var announcement = item.Value;
@@ -56,7 +63,12 @@ namespace HASALapp.Services
 
             var surveys = JsonConvert.DeserializeObject<Dictionary<string, Survey>>(_surveys.Result.Body);
             var choices = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, UserChoice>>>(_choices.Result.Body);
-          
+
+            if (_surveys.Result.Body == "null")
+            {
+                return new List<Survey>();
+            }
+
 
             var surveyList = new List<Survey>();
             foreach (var item in surveys.OrderBy(x => x.Value.Desc))
@@ -94,6 +106,11 @@ namespace HASALapp.Services
         {
             var response = await client.GetAsync(CollectionEnum.locations.ToString());
             var locations = JsonConvert.DeserializeObject<Dictionary<string, Location>>(response.Body);
+
+            if (response.Body == "null")
+            {
+                return new List<Location>();
+            }
 
 
             var locationList = new List<Location>();

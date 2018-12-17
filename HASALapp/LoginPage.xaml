@@ -5,7 +5,7 @@
              >
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <Image Source="logo.jpg"   VerticalOptions="Center" ></Image>
+            <Image Source="logo.png"   VerticalOptions="Center"  WidthRequest="200" ></Image>
             <Entry x:Name="emailEntry"
                    Placeholder="E-mail"
                    VerticalOptions="Center"
@@ -14,6 +14,7 @@
             <Entry x:Name="passwordEntry"
                    Placeholder="Şifre"
                    VerticalOptions="Center"
+                   IsPassword="true"
                     >               
             </Entry>
             <Button x:Name="loginButton" 

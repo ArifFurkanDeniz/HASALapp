@@ -28,7 +28,7 @@ namespace HASALapp
                 {
                     if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
                     {
-                        await DisplayAlert("Konum gerekli", "Uygulama konum bilgisini kullanmalı", "Tamam");
+                        await DisplayAlert("Konum izni gerekli", "Uygulama konum bilgisini kullanmalı", "Tamam");
                     }
 
 
@@ -56,7 +56,7 @@ namespace HASALapp
             }
             catch (Exception ex)
             {
-                await DisplayAlert("Konum gerekli", ex.Message, "Tamam");
+                await DisplayAlert("Konum özellğiğinin açılması gerekli", ex.Message, "Tamam");
             }
 
             MapSpan region = null;

@@ -13,10 +13,10 @@ namespace HASALapp
 
             InitializeComponent();
 
-            /*#if DEBUG
+            #if DEBUG
             emailEntry.Text = "ariffurkandeniz@gmail.com";
             passwordEntry.Text = "535353";
-            #endif*/
+            #endif
            
 
             emailEntry.Text = SettingsService.LastUsedEmail;

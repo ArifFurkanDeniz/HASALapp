@@ -6,7 +6,8 @@ namespace HASALapp.Enums
         announcements,
         surveys,
         locations,
-        userchoices
+        userchoices,
+        Choices
 
     }
 }

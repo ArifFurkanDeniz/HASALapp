@@ -5,6 +5,7 @@
              x:Class="HASALapp.SurveysPage">
     <ContentPage.Content>
        <StackLayout>
+            <Label x:Name="EmptyLabel" IsVisible="false" />
             <ListView x:Name="SurveysView" ItemTapped="Handle_ItemTapped" ItemSelected="Handle_ItemSelected" >
             <ListView.ItemTemplate>
               <DataTemplate>

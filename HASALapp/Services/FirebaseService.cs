@@ -73,28 +73,33 @@ namespace HASALapp.Services
             var surveyList = new List<Survey>();
             foreach (var item in surveys.OrderBy(x => x.Value.Desc))
             {
-                var _surveyChoices = await client.GetAsync(CollectionEnum.surveys.ToString());
-                var _surveyChoices2 = JsonConvert.DeserializeObject<Dictionary<string, Choice>>(_surveyChoices.Body);
-
-                var survey = item.Value;
-                survey.Key = item.Key;
-                survey._Choices = _surveyChoices2.Select(x=> new Choice{ Key= x.Key, Title = x.Value.Title}).ToList();
-
-                if (choices!=null)
+                var _surveyChoices = await client.GetAsync(CollectionEnum.surveys.ToString()+"/"+item.Key +"/" + CollectionEnum.Choices.ToString());
+               
+                if (_surveyChoices.Body != "null")
                 {
-                    var userChoices = choices.Where(x => x.Key == item.Key).Select(x => x.Value).FirstOrDefault();
-                    if (userChoices != null)
-                    {
-                        foreach (var choice in survey._Choices)
-                        {
-                            if (userChoices.Values.Where(x => x.ChoiceKey == choice.Key).Any())
-                            {
-                                choice.IsSelected = true;
+                    var _surveyChoices2 = JsonConvert.DeserializeObject<Dictionary<string, Choice>>(_surveyChoices.Body);
 
+                    var survey = item.Value;
+                    survey.Key = item.Key;
+                    survey._Choices = _surveyChoices2.Select(x => new Choice { Key = x.Key, Title = x.Value.Title }).ToList();
+
+                    if (choices != null)
+                    {
+                        var userChoices = choices.Where(x => x.Key == item.Key).Select(x => x.Value).FirstOrDefault();
+                        if (userChoices != null)
+                        {
+                            foreach (var choice in survey._Choices)
+                            {
+                                if (userChoices.Values.Where(x => x.ChoiceKey == choice.Key).Any())
+                                {
+                                    choice.IsSelected = true;
+
+                                }
                             }
                         }
                     }
                 }
+               
                
                 surveyList.Add(item.Value);
             }

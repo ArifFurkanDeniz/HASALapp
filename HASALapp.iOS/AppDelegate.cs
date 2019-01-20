@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Firebase;
+
 
 namespace HASALapp.iOS
 {
@@ -23,6 +25,8 @@ namespace HASALapp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Firebase.Core.App.Configure();
+            Xamarin.FormsMaps.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

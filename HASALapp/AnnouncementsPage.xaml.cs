@@ -24,6 +24,13 @@ namespace HASALapp
 
             announcements = new ObservableCollection<Announcement>(announcementList);
             AnnouncementsView.ItemsSource = announcements;
+            if (announcements.Count == 0)
+            {
+                EmptyLabel.Text = "Henüz eklenmiş bir duyuru mevcut değil";
+                EmptyLabel.IsVisible = true;
+                AnnouncementsView.IsVisible = false;
+
+            }
             base.OnAppearing();
         }
 

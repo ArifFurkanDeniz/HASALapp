@@ -22,6 +22,13 @@ namespace HASALapp
             ObservableCollection<Survey> surveys = new ObservableCollection<Survey>(surveyList);
 
             SurveysView.ItemsSource = surveys;
+            if (surveys.Count == 0)
+            {
+                EmptyLabel.Text = "Henüz eklenmiş bir anket mevcut değil";
+                EmptyLabel.IsVisible = true;
+                SurveysView.IsVisible = false;
+
+            }
             base.OnAppearing();
         }
 

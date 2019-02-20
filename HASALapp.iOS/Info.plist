@@ -26,8 +26,6 @@
 	<string>HASALapp</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.afdapps.HASALApp</string>
-	<key>CFBundleVersion</key>
-	<string>1.3</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -42,5 +40,15 @@
 	<string>Uygulamanın size göstereceği konumlarla birlikte bu konumlara olan uzaklığı görebilmek için izninize ihtiyacımız var. Uygulamanın konum bilginizi kullanmak için izin vermek ister misiniz?</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>$(PRODUCT_NAME) user your calendar.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>CFBundleVersion</key>
+	<string>2.3</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.2</string>
 </dict>
 </plist>

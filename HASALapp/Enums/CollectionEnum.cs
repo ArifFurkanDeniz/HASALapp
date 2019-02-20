@@ -7,7 +7,9 @@ namespace HASALapp.Enums
         surveys,
         locations,
         userchoices,
-        Choices
+        Choices,
+        questions,
+        tokens
 
     }
 }

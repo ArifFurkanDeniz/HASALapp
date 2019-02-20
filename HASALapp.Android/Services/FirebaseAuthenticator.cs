@@ -22,13 +22,20 @@ namespace HASALapp.Droid.Services
             {
                 var token = await user.User.GetIdTokenAsync(false);
 
-                var _user = new User()
+                if (token!=null)
                 {
-                    Token = token.Token,
-                    UserId = user.User.Uid,
-                    Email = user.User.Email
-                };
-                return _user;
+                    var _user = new User()
+                    {
+                        Token = token.Token,
+                        UserId = user.User.Uid,
+                        Email = user.User.Email
+                    };
+                    return _user;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {

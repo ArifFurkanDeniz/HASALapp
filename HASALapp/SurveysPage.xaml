@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HASALapp.SurveysPage">
     <ContentPage.Content>
-       <StackLayout>
+       <StackLayout Padding="0,20">
+             <Label Text="ANKETLER" HorizontalOptions="Center"/>
             <Label x:Name="EmptyLabel" IsVisible="false" />
             <ListView x:Name="SurveysView" ItemTapped="Handle_ItemTapped" ItemSelected="Handle_ItemSelected" >
             <ListView.ItemTemplate>

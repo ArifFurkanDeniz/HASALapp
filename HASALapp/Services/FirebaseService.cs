@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -145,6 +146,81 @@ namespace HASALapp.Services
 
             return true;
            
+        }
+
+        public async Task<bool> PostQuestion(string questionKey, string title, string text)
+        {
+            try
+            {
+                if (questionKey == null)
+                {
+                    var response = await client.PushAsync(CollectionEnum.questions.ToString() + '/' + User.UserId + '/',
+                                                                  new Question()
+                                                                  {
+                                                                      Title = title,
+                                                                  });
+
+                    var response2 = await client.PushAsync(CollectionEnum.questions.ToString() + '/' + User.UserId + '/' + response.Result.name + "/messages",
+                                                                  new Message()
+                                                                  {
+                                                                       Text = text,
+                                                                       Type = 1
+                                                                  });
+
+
+
+                }
+                else
+                {
+                    var response = await client.PushAsync(CollectionEnum.questions.ToString() + '/' + User.UserId + '/' + questionKey +"/messages",
+                                                                  new Message() { Text  = text, Type =1 });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<List<Question>> GetMyQuestions()
+        {
+            var response = await client.GetAsync(CollectionEnum.questions.ToString() + '/' + User.UserId);
+            var questions = JsonConvert.DeserializeObject<Dictionary<string, Question>>(response.Body);
+
+            if (response.Body == "null")
+            {
+                return new List<Question>();
+            }
+
+
+            var questionList = new List<Question>();
+            foreach (var item in questions)
+            {
+                var question = item.Value;
+                question.Key = item.Key;
+                questionList.Add(item.Value);
+            }
+
+            return questionList;
+        }
+
+        public async Task<bool> SendToken(string token)
+        {
+            try
+            {
+                var response = await client.UpdateAsync(CollectionEnum.tokens.ToString() + '/' + User.UserId,
+                                                                 new UserToken() { Token = token});
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

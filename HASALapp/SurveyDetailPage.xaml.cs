@@ -50,7 +50,7 @@ namespace HASALapp
           
             if (result)
             {
-                await DisplayAlert("Başarılı", "Anket oyunuz gödnerilmiştir.", "Tamam");
+                await DisplayAlert("Başarılı", "Anket oyunuz gönderilmiştir.", "Tamam");
             }
             else
             {

@@ -38,6 +38,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MyQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AskQuestionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -75,6 +83,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\UserChoice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SettingsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GeneralHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyQuestionPage.xaml.cs">
+      <DependentUpon>MyQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)AskQuestionPage.xaml.cs">
+      <DependentUpon>AskQuestionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Question.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Token.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SplashPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

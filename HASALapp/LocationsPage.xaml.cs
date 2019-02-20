@@ -7,11 +7,17 @@ using Xamarin.Forms.Maps;
 using Plugin.Permissions.Abstractions;
 using Plugin.Permissions;
 using System.Globalization;
+#if __IOS__
+using Plugin.ExternalMaps;
+#endif
 
 namespace HASALapp
 {
     public partial class LocationsPage : ContentPage
     {
+        private string selectedPinName;
+        private Position selectedPosition;
+        private Button button;
         public LocationsPage()
         {
             InitializeComponent();
@@ -89,7 +95,7 @@ namespace HASALapp
 
             FirebaseService firebaseService = new FirebaseService();
             var locationList = await firebaseService.GetLocations();
-            #region pins
+#region pins
             foreach (var item in locationList)
             {
                 double latitude = Convert.ToDouble(item.Position.ToString().Split(',')[0], CultureInfo.InvariantCulture);
@@ -100,15 +106,51 @@ namespace HASALapp
                     Type = PinType.Place,
                     Position = position,
                     Label = item.Title,
-                    Address = item.Text
+                    Address = item.Text,
+                     
                 };
+
+                pin.Clicked += (sender, args) => {
+
+#if __IOS__
+                    button.IsEnabled = true;
+                    button.Text = pin.Label + " için yol tarifi";
+#endif
+                   selectedPinName = pin.Label;
+                    selectedPosition = pin.Position;
+                };
+
                 map.Pins.Add(pin);
             }
          
-            #endregion
+#endregion
 
             var stack = new StackLayout { Spacing = 0 };
             stack.Children.Add(map);
+
+#if __IOS__
+                 button = new Button()
+                {
+                    Text = "Yol tarifi",
+                    VerticalOptions = LayoutOptions.End,
+                    IsEnabled = false
+                    
+                };
+
+                button.Clicked += (sender, args)=> {
+                   
+                    if (selectedPosition != null)
+                    {
+                        CrossExternalMaps.Current.NavigateTo(selectedPinName, selectedPosition.Latitude, selectedPosition.Longitude);
+                    }
+                   
+                };
+
+            button.BackgroundColor = Color.White;
+            button.TextColor = Color.FromHex("#823642");
+            stack.Children.Add(button);
+#endif
+
             Content = stack;
             base.OnAppearing();
         }

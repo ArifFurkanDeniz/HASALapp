@@ -23,7 +23,7 @@ namespace HASALapp
             passwordEntry.Text = SettingsService.LastUsedPassword;
 
         }
-        protected async override void OnAppearing()
+        /*protected async override void OnAppearing()
         {
     
             if (!string.IsNullOrEmpty(SettingsService.LastUsedEmail) && !string.IsNullOrEmpty(SettingsService.LastUsedPassword) && !GeneralHelper.IsNotFirstLogin)
@@ -47,7 +47,7 @@ namespace HASALapp
                
             }
             base.OnAppearing();
-        }
+        }*/
 
 
         async void Login_Clicked(object sender, System.EventArgs e)
@@ -62,6 +62,13 @@ namespace HASALapp
                     SettingsService.LastUsedEmail = emailEntry.Text;
                     SettingsService.LastUsedPassword = passwordEntry.Text;
                     FirebaseService.User = user;
+
+                    FirebaseService _firebaseService = new FirebaseService();
+                    if (GeneralHelper.NotificationToken != null)
+                    {
+                        await _firebaseService.SendToken(GeneralHelper.NotificationToken);
+                    }
+                   
                     await Navigation.PushModalAsync(new NavigationPage(new MyTabbedPage()));
                 }
             }

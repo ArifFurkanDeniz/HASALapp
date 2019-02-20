@@ -13,9 +13,20 @@ namespace HASALapp
         {
             InitializeComponent();
 
+            MainPage = new SplashPage();
 
-            MainPage = new LoginPage();
+            /* var _task = StartedPage();
 
+
+             if (!_task)
+             {
+                 MainPage = new LoginPage();
+             }
+             else
+             {
+                // MainPage = new MyTabbedPage();
+                 MainPage = new NavigationPage(new MyTabbedPage());
+             }*/
 
         }
 
@@ -35,6 +46,19 @@ namespace HASALapp
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private bool StartedPage()
+        {
+            bool firstLogin = false;
+
+            if (!string.IsNullOrEmpty(SettingsService.LastUsedEmail) && !string.IsNullOrEmpty(SettingsService.LastUsedPassword) && !GeneralHelper.IsNotFirstLogin)
+            {
+                firstLogin = true;
+
+            }
+
+            return firstLogin;
         }
     }
 }

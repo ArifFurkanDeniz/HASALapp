@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HASALapp.AnnouncementsPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="0,20">
+            <Label Text="DUYURULAR" HorizontalOptions="Center" />
             <Label x:Name="EmptyLabel" IsVisible="false" />
             <ListView x:Name="AnnouncementsView" 
                       ItemSelected="Handle_ItemSelected" 

@@ -6,8 +6,7 @@
 	<array>
 		<string>$(AppIdentifierPrefix)com.afdapps.HASALapp</string>
 	</array>
-	
-	
-
+	<key>aps-environment</key>
+	<string>production</string>
 </dict>
 </plist>

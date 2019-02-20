@@ -11,9 +11,10 @@
      <mypages:SurveysPage />
     <ContentPage Title="...">
         <StackLayout Padding="20">
-            <!--<Button Text="ŞİFRE DEĞİŞTİR" Clicked="ChangePassword_Clicked" VerticalOptions="EndAndExpand"></Button>-->
-     
-            <Button Text="ÇIKIŞ YAP" Clicked="Logout_Clicked" VerticalOptions="EndAndExpand"></Button>
+            <Label Text="MENU" HorizontalOptions="Center" />
+            <Button Text="SORU SOR" Clicked="AskQuestion_Clicked" VerticalOptions="Start"></Button>
+            <Button Text="SORULARIM" Clicked="MyQuestions_clicked" VerticalOptions="Start"></Button>     
+            <Button Text="ÇIKIŞ YAP" Clicked="Logout_Clicked" VerticalOptions="Start"></Button>
         </StackLayout>
         
     </ContentPage>

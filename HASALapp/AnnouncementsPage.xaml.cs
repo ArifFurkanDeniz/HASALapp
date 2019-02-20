@@ -36,10 +36,10 @@ namespace HASALapp
 
      
 
-        void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        async void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
         
-            Navigation.PushAsync(new AnnouncementDetailPage((Announcement)e.Item));
+            await Navigation.PushAsync(new AnnouncementDetailPage((Announcement)e.Item));
         }
 
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)

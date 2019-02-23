@@ -152,19 +152,29 @@ namespace HASALapp.Services
         {
             try
             {
+                DateTime e = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+                DateTime s = new DateTime(1970, 1, 1, 0, 0, 0);
+                long timeSpan = e.ToUniversalTime().Ticks - s.Ticks;
+
                 if (questionKey == null)
                 {
                     var response = await client.PushAsync(CollectionEnum.questions.ToString() + '/' + User.UserId + '/',
                                                                   new Question()
                                                                   {
                                                                       Title = title,
+                                                                      Asc = timeSpan,
+                                                                      Desc = timeSpan
+                                                                      * -1
                                                                   });
 
                     var response2 = await client.PushAsync(CollectionEnum.questions.ToString() + '/' + User.UserId + '/' + response.Result.name + "/messages",
                                                                   new Message()
                                                                   {
                                                                        Text = text,
-                                                                       Type = 1
+                                                                       Type = 1,
+                                                                      Asc = timeSpan,
+                                                                      Desc = timeSpan
+                                                                      * -1
                                                                   });
 
 
@@ -173,7 +183,14 @@ namespace HASALapp.Services
                 else
                 {
                     var response = await client.PushAsync(CollectionEnum.questions.ToString() + '/' + User.UserId + '/' + questionKey +"/messages",
-                                                                  new Message() { Text  = text, Type =1 });
+                                                                  new Message() 
+                                                                    { 
+                                                                        Text  = text,
+                                                                        Type =1,
+                                                                        Asc = timeSpan,
+                                                                        Desc = timeSpan
+                                                                      * -1
+                                                                  });
                 }
 
 
@@ -198,7 +215,7 @@ namespace HASALapp.Services
 
 
             var questionList = new List<Question>();
-            foreach (var item in questions)
+            foreach (var item in questions.OrderBy(x=>x.Value.Desc))
             {
                 var question = item.Value;
                 question.Key = item.Key;

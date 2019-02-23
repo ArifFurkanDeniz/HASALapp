@@ -17,19 +17,21 @@ namespace HASALapp
             emailEntry.Text = "ariffurkandeniz@gmail.com";
             passwordEntry.Text = "535353";
             #endif
-           
 
+           
             emailEntry.Text = SettingsService.LastUsedEmail;
             passwordEntry.Text = SettingsService.LastUsedPassword;
 
         }
-        /*protected async override void OnAppearing()
+
+        protected async override void OnAppearing()
         {
     
             if (!string.IsNullOrEmpty(SettingsService.LastUsedEmail) && !string.IsNullOrEmpty(SettingsService.LastUsedPassword) && !GeneralHelper.IsNotFirstLogin)
             {
                 try
                 {
+                    loginButton.IsEnabled = false;
                     var user = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPasswordAsync(SettingsService.LastUsedEmail, SettingsService.LastUsedPassword);
                     //user.Start();
 
@@ -38,6 +40,7 @@ namespace HASALapp
                         GeneralHelper.IsNotFirstLogin = true;
                         FirebaseService.User = user;
                         await Navigation.PushModalAsync(new NavigationPage(new MyTabbedPage()));
+                        loginButton.IsEnabled = true;
                     }
                 }
                 catch (Exception ex)
@@ -47,7 +50,7 @@ namespace HASALapp
                
             }
             base.OnAppearing();
-        }*/
+        }
 
 
         async void Login_Clicked(object sender, System.EventArgs e)

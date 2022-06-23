@@ -57,7 +57,7 @@
       <Version>2.0.4</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.3.0.967583</Version>
